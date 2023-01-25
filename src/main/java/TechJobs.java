@@ -1,3 +1,4 @@
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +11,7 @@ public class TechJobs {
 
     static Scanner in = new Scanner(System.in);
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         // Initialize our field map with key/name pairs
         HashMap<String, String> columnChoices = new HashMap<>();
@@ -65,6 +66,7 @@ public class TechJobs {
                     printJobs(JobData.findByValue(searchTerm));
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
+                    System.out.println(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
             }
         }
@@ -112,14 +114,25 @@ public class TechJobs {
                 validChoice = true;
             }
 
-        } while(!validChoice);
+        } while (!validChoice);
 
         return choiceKeys[choiceIdx];
     }
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
-
-        System.out.println("printJobs is not implemented yet");
+        if (someJobs == null) {
+            System.out.print("\n");
+            System.out.println("No Results");
+        } else {
+            for (HashMap<String, String> job : someJobs) {
+                System.out.print("\n");
+                System.out.println("*****");
+                for (Map.Entry<String, String> j : job.entrySet()) {
+                    System.out.println(j.getKey() + ": " + j.getValue());
+                }
+                System.out.println("*****");
+            }
+        }
     }
 }
