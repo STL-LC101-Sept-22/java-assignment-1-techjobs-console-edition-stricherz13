@@ -63,10 +63,11 @@ public class TechJobs {
                 String searchTerm = in.nextLine();
 
                 if (searchField.equals("all")) {
-                    printJobs(JobData.findByValue(searchTerm));
+                    printJobs(JobData.findByValue(searchTerm.toLowerCase()));
+
                 } else {
-                    printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
-                    System.out.println(JobData.findByColumnAndValue(searchField, searchTerm));
+//                    printJobs(JobData.findByValue(searchTerm.toLowerCase()));
+                    printJobs(JobData.findByColumnAndValue(searchField, searchTerm.toLowerCase()));
                 }
             }
         }
@@ -121,7 +122,7 @@ public class TechJobs {
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
-        if (someJobs == null) {
+        if (someJobs.isEmpty()) {
             System.out.print("\n");
             System.out.println("No Results");
         } else {
